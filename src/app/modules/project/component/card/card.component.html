@@ -1,0 +1,15 @@
+<nz-card nzHoverable [nzCover]="pnlProjectConver" routerLink="/project/{{ $key }}">
+  <div>
+    <h3>{{ project.title }}</h3>
+    <p>{{ project.type }}</p>
+    <div>
+      <nz-tag *ngFor="let keyword of project.keywords">
+        <i class="anticon anticon-tag"></i>
+        {{ keyword.content }}
+      </nz-tag>
+    </div>
+  </div>
+</nz-card>
+<ng-template #pnlProjectConver>
+  <img src="{{ project.screens[0].url }}"/>
+</ng-template>

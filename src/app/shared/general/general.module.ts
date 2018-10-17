@@ -1,3 +1,4 @@
+import { FooterComponent } from './../partial/footer/footer.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -18,27 +19,31 @@ import zh from '@angular/common/locales/zh';
 registerLocaleData(zh);
 
 import { LoadingComponent } from './../partial/loading/loading.component';
-import { FooterComponent } from './../partial/footer/footer.component';
-import { HeaderComponent } from './../partial/header/header.component';
+import { HeaderComponent } from '../partial/header/header.component';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    RouterModule,
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    NgZorroAntdModule
   ],
   declarations: [
+    LoadingComponent,
     HeaderComponent,
-    FooterComponent,
-    LoadingComponent
+    FooterComponent
   ],
   exports: [
     NgZorroAntdModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule,
+    LoadingComponent,
     HeaderComponent,
-    FooterComponent,
-    LoadingComponent
+    FooterComponent
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_TW }]
 })

@@ -1,3 +1,115 @@
-<p>
-  index works!
-</p>
+<app-loading *ngIf="isLoading"></app-loading>
+<div nz-row *ngIf="!isLoading">
+  <div nz-col nzXz="24" nzSm="24" nzMd="12" nzLg="6">
+    <h1>簡介</h1>
+    <img src="{{ introduction.photo }}">
+    <a class="txt-link" *ngFor="let link of introduction.links" href="{{ link.url }}" target="_blank">
+      <span [innerHTML]="link.icon"></span>
+    </a>
+    <table>
+      <tr>
+        <th>生日</th>
+        <td>1988-12-18</td>
+      </tr>
+      <tr>
+        <th>學歷</th>
+        <td>碩士</td>
+      </tr>
+      <tr>
+        <th>電子信箱</th>
+        <td>ao6swind@hotmail.com</td>
+      </tr>
+      <tr>
+        <th>履歷</th>
+        <td><a target="_blank" href="{{ introduction.resume }}">PDF</a></td>
+      </tr>
+    </table>
+  </div>
+  <div nz-col nzXz="24" nzSm="24" nzMd="12" nzLg="18">
+    <div nz-row>
+      <div nz-col nzXz="24" nzSm="24" nzMd="24" nzLg="12">
+        <h1>學歷</h1>
+        <nz-timeline>
+          <nz-timeline-item *ngFor="let data of dataSet.educations" [nzDot]="dotTemplate">
+            <p>
+              <small>{{ data.education.start }}～{{ data.education.end }}</small>
+              <br>
+              <span>{{ data.education.level }}＠{{ data.education.school }}</span>
+              <br>
+              <span>{{ data.education.department }}（{{ data.education.major }}）</span>
+            </p>
+          </nz-timeline-item>
+          <ng-template #dotTemplate>
+            <i class="anticon anticon-clock-circle-o" style="font-size: 16px;"></i>
+          </ng-template>
+        </nz-timeline>
+        <h1>證照</h1>
+        <p *ngFor="let data of dataSet.certifications">
+          <a (click)="showCertificaiton(data.certification)">
+            {{ data.certification.name }}
+          </a>
+        </p>
+        <nz-modal 
+          (nzOnCancel)="closeCertification()"
+          [(nzVisible)]="isShowCertification" 
+          [nzFooter]="modalFooter"
+          nzTitle="{{ certification.name }}">
+          <img src="{{ certification.url }}">
+        </nz-modal>
+        <ng-template #modalFooter>
+          <span *ngIf="certification.from != null">
+            <span>發照單位：</span>
+            <span>{{ certification.from }}</span>
+          </span>
+          <span *ngIf="certification.expired != null">
+            <span>有效期限：</span>
+            <span>{{ certification.expired }}</span>
+          </span>
+        </ng-template>
+      </div>
+      <div nz-col nzXz="24" nzSm="24" nzMd="24" nzLg="12">
+        <h1>經歷</h1>
+        <nz-timeline>
+          <nz-timeline-item *ngFor="let data of dataSet.experiences">
+            <p>
+              <small>
+                <span>{{ data.experience.start }}</span>
+                <span *ngIf="data.experience.end != null">～{{ data.experience.end }}</span>
+              </small>
+              <br>
+              <a (click)="showExperience(data.experience)">{{ data.experience.title }}＠{{ data.experience.company }}</a>
+            </p>
+          </nz-timeline-item>
+        </nz-timeline>
+        <nz-drawer nzPlacement="right" 
+          [nzClosable]="false" 
+          [nzVisible]="isShowExperience" 
+          [nzWidth]="500"
+          [nzTitle]="experience.company" 
+          (nzOnClose)="closeExperience()">
+          <p>{{ experience.department }}</p>
+          <p>{{ experience.title }}</p>
+          <pre>{{ experience.description }}</pre>
+        </nz-drawer>
+      </div>
+      <div nz-col nzSpan="24">
+        <h1>技能</h1>
+        <nz-tabset [nzTabPosition]="'left'" >
+          <nz-tab nzTitle="Tab 1">
+            Content of Tab Pane 1
+          </nz-tab>
+          <nz-tab nzTitle="Tab 2">
+            Content of Tab Pane 2
+          </nz-tab>
+          <nz-tab nzTitle="Tab 3">
+            Content of Tab Pane 3
+          </nz-tab>
+        </nz-tabset>`
+      </div>
+      <div nz-col nzSpan="24">
+        <h1>自傳</h1>
+        <div [innerHTML]="introduction.profile"></div>
+      </div>
+    </div>
+  </div>
+</div>

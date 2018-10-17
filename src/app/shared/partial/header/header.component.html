@@ -1,3 +1,21 @@
-<p>
-  header works!
-</p>
+<nz-header>
+  <div nz-row>
+    <div nz-col nzSpan="18">
+      <div class="logo">
+        <a routerLink="">
+          <img src="assets/img/banner.png">
+        </a>
+      </div>
+      <ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" >
+        <li nz-menu-item routerLink="/">關於</li>
+        <li nz-menu-item routerLink="/project">專案</li>
+      </ul>
+    </div>
+    <div nz-col nzSpan="6">
+      <nz-select [(ngModel)]="language" (ngModelChange)="redirect()">
+        <nz-option nzValue="en-US" nzLabel="English"></nz-option>
+        <nz-option nzValue="zh-TW" nzLabel="中文"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+</nz-header>

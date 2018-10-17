@@ -1,3 +1,36 @@
-<p>
-  index works!
-</p>
+<app-loading *ngIf="isLoading"></app-loading>
+<nz-layout>
+  <app-header></app-header>
+  <nz-layout>
+    <nz-sider nzCollapsible [nzWidth]="numMenuWidth" [(nzCollapsed)]="isCollapsed" [nzCollapsedWidth]="0" [nzBreakpoint]="'lg'">
+      <ul nz-menu [nzMode]="'inline'" style="height:100%;">
+        <li nz-submenu *ngIf="!isLoading">
+          <span title><i class="anticon anticon-user"></i>類型</span>
+          <ul>
+            <li nz-menu-item>全部</li>
+            <li nz-menu-item>桌面應用程式</li>
+            <li nz-menu-item>網頁應用程式</li>
+          </ul>
+        </li>
+        <li nz-submenu *ngIf="!isLoading">
+          <span title><i class="anticon anticon-laptop"></i>標籤</span>
+          <ul>
+            <li nz-menu-item>option5</li>
+            <li nz-menu-item>option6</li>
+            <li nz-menu-item>option7</li>
+          </ul>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-layout style="padding:0 24px">
+      <nz-content *ngIf="!isLoading">
+        <div nz-row>
+          <div nz-col [nzSpan]="numColumeSize" *ngFor="let data of dataSet">
+            <app-card [project]="data.project" [$key]="data.$key"></app-card>
+          </div>
+        </div>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+  <app-footer></app-footer>
+</nz-layout>

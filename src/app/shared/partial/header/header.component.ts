@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LanguageService } from './../../../services/language.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  public language: string;
+
+  constructor
+  (
+    public router: Router,
+    public langService: LanguageService
+  ) 
+  { 
+    this.language = this.langService.getLanguage();
+  }
 
   ngOnInit() {
   }
 
+  redirect(): void
+  {
+    window.location.href = `/${this.language}/#${this.router.url}`;  
+  }
 }
