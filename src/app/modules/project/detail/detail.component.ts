@@ -2,7 +2,7 @@ import { LanguageService } from './../../../services/language.service';
 import { AngularFireList, AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/models/project.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-detail',
@@ -22,6 +22,7 @@ export class DetailComponent implements OnInit {
   constructor
   (
     public route: ActivatedRoute,
+    public router: Router,
     public fb: AngularFireDatabase,
     public langService: LanguageService
   )
@@ -30,8 +31,15 @@ export class DetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.fb_project = this.fb.object(`${this.language}/project/${params.id}`);
       this.fb_project.snapshotChanges().subscribe(item => {
-        this.project = item.payload.val()
-        this.isLoading = false;
+        if(item.key == null)
+        {
+          this.router.navigateByUrl('/project');
+        }
+        else
+        {
+          this.project = item.payload.val()
+          this.isLoading = false;
+        }
       });
     });
   }
