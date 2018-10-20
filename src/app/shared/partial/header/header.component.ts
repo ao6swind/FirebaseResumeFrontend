@@ -25,6 +25,6 @@ export class HeaderComponent implements OnInit {
 
   redirect(): void
   {
-    window.location.href = `/FirebaseResumeFrontend/${this.language}/${this.router.url}`;  
+    window.location.href = `/FirebaseResumeFrontend/${this.language}/#/${this.router.url}`;  
   }
 }
