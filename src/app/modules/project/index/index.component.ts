@@ -20,12 +20,12 @@ export class IndexComponent implements OnInit {
 
   public isCollapsed: boolean;
   public numMenuWidth: number = 200;
-  public numColumeCount: number = 4;
+  public numColumeCount: number = 3;
 
   @HostListener('window:resize', ['$event'])
   onResize(event) 
   {
-    this.numMenuWidth = (event.target.innerWidth > 992) ? 200 : event.target.innerWidth - 55;
+    this.numMenuWidth = (event.target.innerWidth > 992) ? 200 : event.target.innerWidth - 70;
     if(event.target.innerWidth < 576)
       this.numColumeCount = 1;
     else if(event.target.innerWidth < 768)
@@ -33,7 +33,7 @@ export class IndexComponent implements OnInit {
     else if(event.target.innerWidth < 1200)
       this.numColumeCount = 3;
     else
-      this.numColumeCount = 4;
+      this.numColumeCount = 3;
   }
 
   constructor
@@ -49,6 +49,7 @@ export class IndexComponent implements OnInit {
       this.dataSet = list.map(item => {
         return {
           $key: item.key,
+          visible: true,
           project: item.payload.val()
         }
       });
@@ -79,4 +80,32 @@ export class IndexComponent implements OnInit {
   ngOnInit() {
   }
 
+  showProjects(){
+    
+  }
+
+  filterType(type: string)
+  {
+    for(let i = 0; i <=this.dataSet.length - 1; i++)
+    {
+      this.dataSet[i].visible = true;
+      this.dataSet[i].visible = (this.dataSet[i].project.type == type || type == '');
+    }
+  }
+
+  filterKeyword(keyword: string)
+  {
+    for(let i = 0; i <= this.dataSet.length - 1; i++)
+    {
+      this.dataSet[i].visible = false;
+      for(let j = 0; j <= this.dataSet[i].project.keywords.length - 1; j++)
+      {
+        if(this.dataSet[i].project.keywords[j].content == keyword)
+        {
+          this.dataSet[i].visible = true;
+          break;
+        }
+      }
+    }
+  }
 }

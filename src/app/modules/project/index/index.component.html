@@ -4,34 +4,59 @@
   <nz-layout>
     <nz-sider nzCollapsible [nzWidth]="numMenuWidth" [(nzCollapsed)]="isCollapsed" [nzCollapsedWidth]="0" [nzBreakpoint]="'lg'">
       <ul nz-menu [nzMode]="'inline'" style="height:100%;">
-        <li nz-submenu *ngIf="!isLoading">
+        <li nz-submenu *ngIf="!isLoading" [nzOpen]="true">
           <span title>
             <i class="anticon anticon-user"></i>
             <span i18n="@txtType">類型</span>
           </span>
           <ul>
-            <li nz-menu-item><span i18n="@txtAll">全部</span></li>
-            <li nz-menu-item *ngFor="let type of types">{{ type }}</li>
+            <li nz-menu-item (click)="filterType('')"><span i18n="@txtAll">全部</span></li>
+            <li nz-menu-item (click)="filterType(type)" *ngFor="let type of types" >{{ type }}</li>
           </ul>
         </li>
-        <li nz-submenu *ngIf="!isLoading">
+        <li nz-submenu *ngIf="!isLoading" [nzOpen]="true">
           <span title>
             <i class="anticon anticon-laptop"></i>
             <span i18n="@txtTag">標籤</span>
           </span>
           <ul>
-            <li nz-menu-item *ngFor="let keyword of keywords">{{ keyword }}</li>
+            <li nz-menu-item *ngFor="let keyword of keywords" (click)="filterKeyword(keyword)">{{ keyword }}</li>
           </ul>
         </li>
       </ul>
     </nz-sider>
     <nz-layout style="padding:0 24px">
       <nz-content *ngIf="!isLoading">
-        <div nz-row>
-          <div nz-col [nzSpan]="24 / numColumeCount" *ngFor="let data of dataSet">
-            <app-card [project]="data.project" [$key]="data.$key"></app-card>
-          </div>
-        </div>
+        <nz-list
+          [nzDataSource]="dataSet"
+          [nzItemLayout]="'vertical'"
+          [nzRenderItem]="pnlListItem">
+          <ng-template #pnlListItem let-item>
+            <nz-list-item [nzContent]="nzTitle" [nzActions]="[pnlLinkAction]" [nzExtra]="pnlExtra" *ngIf="item.visible">
+              <ng-template #pnlLinkAction>
+                <a routerLink="/project/{{ item.$key }}">
+                  <span i18n="@@txtReadMore">閱讀詳情</span>
+                </a>
+              </ng-template>
+              <nz-list-item-meta
+                [nzTitle]="pnlTitle"
+                [nzDescription]="item.project.type">
+                <ng-template #nzTitle>
+                  <nz-tag *ngFor="let keyword of item.project.keywords" (click)="filterKeyword(keyword.content)">
+                    <i class="anticon anticon-tag"></i>
+                    <span>{{ keyword.content }}</span>
+                  </nz-tag>
+                </ng-template>
+              </nz-list-item-meta>
+              <ng-template #pnlTitle>
+                <h3>{{ item.project.title }}</h3>
+              </ng-template>
+              <ng-template #pnlExtra>
+                <img width="272" src="{{ item.project.screens[0].url }}">
+              </ng-template>
+            </nz-list-item>
+          </ng-template>
+        </nz-list>
       </nz-content>
     </nz-layout>
   </nz-layout>
