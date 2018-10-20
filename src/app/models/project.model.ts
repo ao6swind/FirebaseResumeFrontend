@@ -6,7 +6,7 @@ export class Project
 {
     public title: string;
     public type: string;
-    public is_public: boolean;
+    public is_public: string;
     public url: string = '';
     public description: string = '';
     public keywords: Array<Keyword> = new Array<Keyword>();

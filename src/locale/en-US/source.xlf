@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="txtLoading" datatype="html">
+        <source>載入中</source>
+        <target>Loading</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/partial/loading/loading.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="txtExperience" datatype="html">
+        <source>經歷</source>
+        <target>Experience</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/introduction/component/experience/experience.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="txtEducation" datatype="html">
+        <source>學歷</source>
+        <target>Education</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/introduction/component/education/education.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/introduction/component/about/about.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="txtCertification" datatype="html">
+        <source>證照</source>
+        <target>Certification</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/introduction/component/certification/certification.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="txtFrom" datatype="html">
+        <source>發照單位：</source>
+        <target>Issued By:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/introduction/component/certification/certification.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="txtExpired" datatype="html">
+        <source>有效期限：</source>
+        <target>Expiration Date:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/introduction/component/certification/certification.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="txtIntroduction" datatype="html">
+        <source>簡介</source>
+        <target>About</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/introduction/component/about/about.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="txtName" datatype="html">
+        <source>姓名</source>
+        <target>Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/introduction/component/about/about.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="txtWuHaoYu" datatype="html">
+        <source>吳鎬宇</source>
+        <target>Wu Hao-Yu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/introduction/component/about/about.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="txtBirthday" datatype="html">
+        <source>生日</source>
+        <target>Birthday</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/introduction/component/about/about.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="txtMaster" datatype="html">
+        <source>碩士</source>
+        <target>Master</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/introduction/component/about/about.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="txtEmail" datatype="html">
+        <source>電子信箱</source>
+        <target>E-mail</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/introduction/component/about/about.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="txtResume" datatype="html">
+        <source>履歷</source>
+        <target>Resume</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/introduction/component/about/about.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="txtSkill" datatype="html">
+        <source>技能</source>
+        <target>Skill</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/introduction/component/skill/skill.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="txtProfile" datatype="html">
+        <source>自傳</source>
+        <target>Profile</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/introduction/component/profile/profile.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bcdc1940a59c84285e8c2ec861e7f4107b820aa3" datatype="html">
+        <source>類型</source>
+        <target>Type</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/project/index/index.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <note priority="1" from="description">@txtType</note>
+      </trans-unit>
+      <trans-unit id="b8fdca1ac9049a52186f4a0d77133aa5ff718ee3" datatype="html">
+        <source>全部</source>
+        <target>All</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/project/index/index.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <note priority="1" from="description">@txtAll</note>
+      </trans-unit>
+      <trans-unit id="d1425dbdded75941e8652fbd8efdeeda0878c473" datatype="html">
+        <source>標籤</source>
+        <target>Tags</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/project/index/index.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <note priority="1" from="description">@txtTag</note>
+      </trans-unit>
+      <trans-unit id="txtUrl" datatype="html">
+        <source>網址：</source>
+        <target>Url:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/project/component/information/information.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="txtMilestone" datatype="html">
+        <source>里程碑</source>
+        <target>Milestone</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/project/component/milestone/milestone.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="txtDescription" datatype="html">
+        <source>簡介</source>
+        <target>Description</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/modules/project/component/description/description.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
