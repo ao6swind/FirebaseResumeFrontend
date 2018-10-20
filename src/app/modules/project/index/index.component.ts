@@ -42,6 +42,8 @@ export class IndexComponent implements OnInit {
     public langService: LanguageService
   ) 
   { 
+    this.language = this.langService.getLanguage();
+
     this.projects = this.fb.list(`${this.language}/project`);
     this.projects.snapshotChanges().subscribe(list => {
       this.dataSet = list.map(item => {

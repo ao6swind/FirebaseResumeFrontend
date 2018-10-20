@@ -177,6 +177,22 @@
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="txtAbout" datatype="html">
+        <source>關於</source>
+        <target>About</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/partial/header/header.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="txtProject" datatype="html">
+        <source>專案</source>
+        <target>Project</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/partial/header/header.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>
