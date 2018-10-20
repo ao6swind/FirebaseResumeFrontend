@@ -1,0 +1,18 @@
+<h1>{{ project.title }}</h1>
+<p>{{ project.type }}</p>
+<p>
+  <nz-tag *ngFor="let keyword of project.keywords">
+    <i class="anticon anticon-tag"></i>
+    {{ keyword.content }}
+  </nz-tag>
+</p>
+<p *ngIf="project.is_public == 'true'">
+  <span>網址：</span>
+  <a>{{ project.url }}</a>
+</p>
+<nz-carousel nzAutoPlay [nzEffect]="'scrollx'">
+  <div nz-carousel-content *ngFor="let screen of project.screens; let i = index">
+    <img src="{{ screen.url }}">
+    <h3>{{ screen.title }}</h3>
+  </div>
+</nz-carousel>

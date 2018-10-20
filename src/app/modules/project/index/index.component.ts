@@ -14,7 +14,9 @@ export class IndexComponent implements OnInit {
   public language: string = 'zh-TW';
 
   public projects: AngularFireList<Project>;
-  public dataSet = [];
+  public types    = [];
+  public keywords = [];
+  public dataSet  = [];
 
   public isCollapsed: boolean;
   public numMenuWidth: number = 200;
@@ -48,6 +50,26 @@ export class IndexComponent implements OnInit {
           project: item.payload.val()
         }
       });
+
+      this.types = list.reduce( (prev, current) => {
+        if(prev.indexOf(current.payload.val().type) == -1)
+        {
+          prev.push(current.payload.val().type);
+        }
+        return prev;
+      }, []);
+
+      this.keywords = list.reduce((prev, current) => {
+        for(let i = 0; i <= current.payload.val().keywords.length - 1; i++)
+        {
+          if(prev.indexOf(current.payload.val().keywords[i].content) == -1)
+          {
+            prev.push(current.payload.val().keywords[i].content);
+          }
+        }
+        return prev;
+      }, []);
+
       this.isLoading = false;
     });
   }

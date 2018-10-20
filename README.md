@@ -1,27 +1,31 @@
-# ResumeFrontend
+# 執行
++ ng serve -c="zh-TW" -o
++ ng serve -c="en-US" -o
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.
+# 編譯
++ ng build -c="zh-TW"
++ ng build -c="en-US"
 
-## Development server
+# i18n
++ 英文（en-US）：ng xi18n --i18n-locale en-US --out-file locale/en-US/source.xlf
++ 中文（zh-TW）：ng xi18n --i18n-locale zh-TW --out-file locale/zh-TW/source.xlf
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+# environments
+因為這裡面會放一些firebase config，所以就不commit上來。詳情請參考firebase官方文件  
+路徑：  
++ src/environments/environment.ts
++ src/environments/environment.prod.ts
+```js
+// firebaseConfig這個物件的屬性涵義可以參考firebase官方文件
+export const environment = {
+    production: true,
+    firebaseConfig: {
+        apiKey: "{{ FIREBASE_API_KEI }}",
+        authDomain: "{{ FIREBASE_AUTH_DOMAIN }}",
+        databaseURL: "{{ FIREBASE_DATABASE_URL }}",
+        projectId: "{{ FIREBASE_PROJECT_ID }}",
+        storageBucket: "{{ FIREBASE_STORAGE_BUCKET }}",
+        messagingSenderId: "{{ FIREBASE_MESSAGING_SENDER_ID }}"
+    }
+};
+```

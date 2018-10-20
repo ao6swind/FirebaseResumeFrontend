@@ -15,13 +15,11 @@ import { Link } from './../../../models/link.model';
 })
 export class IndexComponent implements OnInit {
 
-  public isShowCertification: boolean = false;
-  public isShowExperience: boolean = false;
+  
   public isLoading: boolean = true;
   public language: string = 'zh-TW';
 
-  public experience: Experience = new Experience();
-  public certification: Certification = new Certification();
+  
   public introduction: Introduction = new Introduction();
 
   public certifications: AngularFireList<Certification>;
@@ -30,8 +28,6 @@ export class IndexComponent implements OnInit {
   public introductions: AngularFireList<Introduction>;
   public skills: AngularFireList<Skill>;
   
-  public tabs = [];
-
   public dataSet = {
     certifications: [],
     educations: [],
@@ -48,8 +44,6 @@ export class IndexComponent implements OnInit {
     skill: false
   };
 
-  
-
   constructor
   (
     public fb: AngularFireDatabase,
@@ -59,10 +53,10 @@ export class IndexComponent implements OnInit {
     this.language = this.langService.getLanguage();
 
     this.certifications = this.fb.list(`${this.language}/certification`);
-    this.educations = this.fb.list(`${this.language}/education`);
-    this.experiences = this.fb.list(`${this.language}/experience`);
-    this.introductions = this.fb.list(`${this.language}/introduction`);
-    this.skills = this.fb.list(`${this.language}/skills`);
+    this.educations     = this.fb.list(`${this.language}/education`);
+    this.experiences    = this.fb.list(`${this.language}/experience`);
+    this.introductions  = this.fb.list(`${this.language}/introduction`);
+    this.skills         = this.fb.list(`${this.language}/skill`);
 
     this.certifications.snapshotChanges().subscribe(list => {
       this.dataSet.certifications = list.map(item => {
@@ -98,12 +92,29 @@ export class IndexComponent implements OnInit {
     });
 
     this.skills.snapshotChanges().subscribe(list => {
-      this.dataSet.skills = list.map(item => {
-        return {
-          $key: item.key,
-          skill: item.payload.val()
+      this.dataSet.skills = list.reduce( (prev, current) => {
+        let index = -1;
+        prev.some((skill, i) => {
+          if (skill.catelog === current.payload.val().catelog) 
+          {
+            index = i;
+            return true;
+          }
+        });
+        if (index > -1) 
+        {
+          prev[index].skills.push(current.payload.val());
+        } 
+        else 
+        {
+          prev.push({
+            catelog: current.payload.val().catelog,
+            skills: [current.payload.val()]
+          });
         }
-      });
+        return prev;
+      }, []);
+
       this.isReady.skill = true;
       this.checkIsLoading();
     });
@@ -119,8 +130,6 @@ export class IndexComponent implements OnInit {
       if(this.dataSet.introductions.length > 0)
       {
         this.introduction = this.dataSet.introductions[0].introduction;
-
-        // 因為firebase在儲存的時候如果沒有child就會直接砍掉該屬性，所以檢查看看要不要建立回來
         this.introduction['links'] = ((typeof this.introduction['links']) != 'undefined') ? this.introduction['links'] : new Array<Link>();
       }
       this.isReady.introduction = true;
@@ -128,33 +137,18 @@ export class IndexComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
+    
   }
 
-  checkIsLoading(){
+  checkIsLoading()
+  {
     this.isLoading = (
       this.isReady.certification && 
       this.isReady.education && 
       this.isReady.experience && 
       this.isReady.introduction && 
       this.isReady.skill) ? false : true;
-  }
-
-  showCertificaiton(item: Certification){
-    this.certification = item;
-    this.isShowCertification = true;
-  }
-
-  closeCertification(){
-    this.isShowCertification = false;
-  }
-
-  showExperience(item: Experience){
-    this.experience = item;
-    this.isShowExperience = true;
-  }
-
-  closeExperience(){
-    this.isShowExperience = false;
   }
 }

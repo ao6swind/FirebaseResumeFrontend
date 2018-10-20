@@ -1,0 +1,9 @@
+<h1 i18n="@@txtSkill">技能</h1>
+<nz-tabset [nzTabPosition]="'left'" [nzShowPagination]="false">
+  <nz-tab nzTitle="{{ tab.catelog }}" *ngFor="let tab of dataSet">
+    <div *ngFor="let skill of tab.skills">
+      <div>{{ skill.name }}</div>
+      <nz-progress [nzPercent]="skill.percentage" [nzShowInfo]="false"></nz-progress>
+    </div>
+  </nz-tab>
+</nz-tabset>

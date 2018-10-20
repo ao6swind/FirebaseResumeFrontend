@@ -1,9 +1,26 @@
+<app-loading *ngIf="isLoading"></app-loading>
 <nz-layout>
   <app-header></app-header>
-  <nz-content>
-    <div>
-      project detail
-    </div>
-  </nz-content>
+  <nz-layout>
+    <nz-layout style="padding:0 24px" *ngIf="!isLoading">
+      <nz-content>
+        <div nz-row *ngIf="!isLoading">
+          <div nz-col nzXz="24" nzSm="24" nzMd="12">
+            <div class="pnl-content">
+              <app-information [project]="project"></app-information>
+            </div>
+          </div>
+          <div nz-col nzXz="24" nzSm="24" nzMd="12">
+            <div class="pnl-content">
+              <app-description [project]="project"></app-description>
+            </div>
+            <div class="pnl-content">
+              <app-milestone [project]="project"></app-milestone>
+            </div>
+          </div>
+        </div>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
   <app-footer></app-footer>
 </nz-layout>

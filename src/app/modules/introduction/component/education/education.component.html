@@ -1,0 +1,17 @@
+<h1 i18n="@@txtEducation">學歷</h1>
+<nz-timeline>
+  <nz-timeline-item *ngFor="let data of dataSet" [nzDot]="dotTemplate">
+    <p>
+      <small>{{ data.education.start }}～{{ data.education.end }}</small>
+      <br>
+      <span>{{ data.education.level }}</span>
+      <span> ＠ </span>
+      <span>{{ data.education.school }}</span>
+      <br>
+      <span>{{ data.education.department }}（{{ data.education.major }}）</span>
+    </p>
+  </nz-timeline-item>
+  <ng-template #dotTemplate>
+    <i class="anticon anticon-clock-circle-o" style="font-size: 16px;"></i>
+  </ng-template>
+</nz-timeline>

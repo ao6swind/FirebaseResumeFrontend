@@ -1,0 +1,23 @@
+<h1 i18n="@@txtCertification">證照</h1>
+<p *ngFor="let data of dataSet">
+  <a (click)="showCertificaiton(data.certification)">
+    {{ data.certification.name }}
+  </a>
+</p>
+<nz-modal 
+  (nzOnCancel)="closeCertification()"
+  [(nzVisible)]="isShowCertification" 
+  [nzFooter]="modalFooter"
+  nzTitle="{{ certification.name }}">
+  <img src="{{ certification.url }}">
+</nz-modal>
+<ng-template #modalFooter>
+  <span *ngIf="certification.from != null">
+    <span i18n="@@txtFrom">發照單位：</span>
+    <span>{{ certification.from }}</span>
+  </span>
+  <span *ngIf="certification.expired != null">
+    <span i18n="@@txtExpired">有效期限：</span>
+    <span>{{ certification.expired }}</span>
+  </span>
+</ng-template>

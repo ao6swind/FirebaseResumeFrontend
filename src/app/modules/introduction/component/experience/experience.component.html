@@ -1,0 +1,30 @@
+<h1 i18n="@@txtExperience">經歷</h1>
+<nz-timeline>
+  <nz-timeline-item *ngFor="let data of dataSet" [nzDot]="dotTemplate">
+    <p>
+      <small>
+        <span>{{ data.experience.start }}</span>
+        <span *ngIf="data.experience.end != null">～{{ data.experience.end }}</span>
+      </small>
+      <br>
+      <a (click)="showExperience(data.experience)">
+        <span>{{ data.experience.title }}</span>
+        <span> ＠ </span>
+        <span>{{ data.experience.company }}</span>
+      </a>
+    </p>
+  </nz-timeline-item>
+  <ng-template #dotTemplate>
+    <i class="anticon anticon-clock-circle-o" style="font-size: 16px;"></i>
+  </ng-template>
+</nz-timeline>
+<nz-drawer nzPlacement="right" 
+  [nzClosable]="false" 
+  [nzVisible]="isShowExperience" 
+  [nzWidth]="500"
+  [nzTitle]="experience.company" 
+  (nzOnClose)="closeExperience()">
+  <p>{{ experience.department }}</p>
+  <p>{{ experience.title }}</p>
+  <pre>{{ experience.description }}</pre>
+</nz-drawer>

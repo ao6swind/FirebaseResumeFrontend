@@ -1,0 +1,27 @@
+<h1 i18n="@@txtIntroduction">簡介</h1>
+<img src="{{ introduction.photo }}">
+<a class="txt-link" *ngFor="let link of introduction.links" href="{{ link.url }}" target="_blank">
+  <span [innerHTML]="link.icon"></span>
+</a>
+<table>
+  <tr>
+    <th i18n="@@txtName">姓名</th>
+    <td i18n="@@txtWuHaoYu">吳鎬宇</td>
+  </tr>
+  <tr>
+    <th i18n="@@txtBirthday">生日</th>
+    <td>1988-12-18</td>
+  </tr>
+  <tr>
+    <th i18n="@@txtEducation">學歷</th>
+    <td i18n="@@txtMaster">碩士</td>
+  </tr>
+  <tr>
+    <th i18n="@@txtEmail">電子信箱</th>
+    <td>ao6swind@hotmail.com</td>
+  </tr>
+  <tr>
+    <th i18n="@@txtResume">履歷</th>
+    <td><a target="_blank" href="{{ introduction.resume }}">PDF</a></td>
+  </tr>
+</table>

@@ -5,19 +5,22 @@
     <nz-sider nzCollapsible [nzWidth]="numMenuWidth" [(nzCollapsed)]="isCollapsed" [nzCollapsedWidth]="0" [nzBreakpoint]="'lg'">
       <ul nz-menu [nzMode]="'inline'" style="height:100%;">
         <li nz-submenu *ngIf="!isLoading">
-          <span title><i class="anticon anticon-user"></i>類型</span>
+          <span title>
+            <i class="anticon anticon-user"></i>
+            <span i18n="@txtType">類型</span>
+          </span>
           <ul>
-            <li nz-menu-item>全部</li>
-            <li nz-menu-item>桌面應用程式</li>
-            <li nz-menu-item>網頁應用程式</li>
+            <li nz-menu-item><span i18n="@txtAll">全部</span></li>
+            <li nz-menu-item *ngFor="let type of types">{{ type }}</li>
           </ul>
         </li>
         <li nz-submenu *ngIf="!isLoading">
-          <span title><i class="anticon anticon-laptop"></i>標籤</span>
+          <span title>
+            <i class="anticon anticon-laptop"></i>
+            <span i18n="@txtTag">標籤</span>
+          </span>
           <ul>
-            <li nz-menu-item>option5</li>
-            <li nz-menu-item>option6</li>
-            <li nz-menu-item>option7</li>
+            <li nz-menu-item *ngFor="let keyword of keywords">{{ keyword }}</li>
           </ul>
         </li>
       </ul>
