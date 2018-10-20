@@ -28,7 +28,7 @@
     <nz-layout style="padding:0 24px">
       <nz-content *ngIf="!isLoading">
         <div nz-row>
-          <div nz-col [nzSpan]="numColumeSize" *ngFor="let data of dataSet">
+          <div nz-col [nzSpan]="24 / numColumeCount" *ngFor="let data of dataSet">
             <app-card [project]="data.project" [$key]="data.$key"></app-card>
           </div>
         </div>

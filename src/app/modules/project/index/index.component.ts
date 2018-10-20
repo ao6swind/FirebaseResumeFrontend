@@ -20,20 +20,20 @@ export class IndexComponent implements OnInit {
 
   public isCollapsed: boolean;
   public numMenuWidth: number = 200;
-  public numColumeSize: number = 6;
+  public numColumeCount: number = 4;
 
   @HostListener('window:resize', ['$event'])
   onResize(event) 
   {
-    this.numMenuWidth = (event.target.innerWidth > 992) ? 200 : event.target.innerWidth - 50;
+    this.numMenuWidth = (event.target.innerWidth > 992) ? 200 : event.target.innerWidth - 55;
     if(event.target.innerWidth < 576)
-      this.numColumeSize = 24;
+      this.numColumeCount = 1;
     else if(event.target.innerWidth < 768)
-      this.numColumeSize = 12;
+      this.numColumeCount = 5;
     else if(event.target.innerWidth < 1200)
-      this.numColumeSize = 8;
+      this.numColumeCount = 3;
     else
-      this.numColumeSize = 6;
+      this.numColumeCount = 4;
   }
 
   constructor
