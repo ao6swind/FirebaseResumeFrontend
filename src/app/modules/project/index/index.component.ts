@@ -33,6 +33,7 @@ export class IndexComponent implements OnInit {
     public langService: LanguageService
   ) 
   { 
+    this.numMenuWidth = (window.innerWidth > 992) ? 200 : window.innerWidth - 70;
     this.language = this.langService.getLanguage();
 
     this.projects = this.fb.list(`${this.language}/project`);
