@@ -1,8 +1,9 @@
+import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LanguageService } from './../../../services/language.service';
 import { AngularFireList, AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
-import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/models/project.model';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-detail',
@@ -18,7 +19,8 @@ export class DetailComponent implements OnInit {
   public projects: AngularFireList<Project>;
   public fb_project: AngularFireObject<Project>;
   public language = 'zh-TW';
-
+  public subscrtion_router: Subscription;
+  public subscrtion_project: Subscription;
   constructor
   (
     public route: ActivatedRoute,
@@ -28,9 +30,9 @@ export class DetailComponent implements OnInit {
   )
   {
     this.language = this.langService.getLanguage();
-    this.route.params.subscribe(params => {
+    this.subscrtion_router = this.route.params.subscribe(params => {
       this.fb_project = this.fb.object(`${this.language}/project/${params.id}`);
-      this.fb_project.snapshotChanges().subscribe(item => {
+      this.subscrtion_project = this.fb_project.snapshotChanges().subscribe(item => {
         if(item.key == null)
         {
           this.router.navigateByUrl('/project');
@@ -44,7 +46,14 @@ export class DetailComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit()
+  {
+
   }
 
+  ngOnDestroy()
+  {
+    this.subscrtion_router.unsubscribe();
+    this.subscrtion_project.unsubscribe();
+  }
 }

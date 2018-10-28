@@ -1,7 +1,8 @@
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { LanguageService } from './../../../services/language.service';
 import { Project } from './../../../models/project.model';
-import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-index',
@@ -12,7 +13,7 @@ export class IndexComponent implements OnInit {
 
   public isLoading: boolean = true;
   public language: string = 'zh-TW';
-
+  public subscription: Subscription;
   public projects: AngularFireList<Project>;
   public types    = [];
   public keywords = [];
@@ -69,11 +70,14 @@ export class IndexComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
+    
   }
 
-  showProjects(){
-    
+  ngOnDestroy()
+  {
+    this.subscription.unsubscribe();
   }
 
   filterType(type: string)
@@ -83,6 +87,7 @@ export class IndexComponent implements OnInit {
       this.dataSet[i].visible = true;
       this.dataSet[i].visible = (this.dataSet[i].project.type == type || type == '');
     }
+    window.scrollTo(0, 0);
   }
 
   filterKeyword(keyword: string)
@@ -99,5 +104,6 @@ export class IndexComponent implements OnInit {
         }
       }
     }
+    window.scrollTo(0, 0);
   }
 }

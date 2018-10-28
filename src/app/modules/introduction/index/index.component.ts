@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { LanguageService } from './../../../services/language.service';
 import { Certification } from './../../../models/certification.model';
@@ -7,27 +7,32 @@ import { Experience } from './../../../models/experience.model';
 import { Introduction } from './../../../models/introduction.model';
 import { Skill } from './../../../models/skill.model';
 import { Link } from './../../../models/link.model';
+import { Subscription } from 'rxjs';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.less']
 })
-export class IndexComponent implements OnInit {
-
-  
+export class IndexComponent implements OnInit 
+{
   public isLoading: boolean = true;
   public language: string = 'zh-TW';
 
-  
   public introduction: Introduction = new Introduction();
-
-  public certifications: AngularFireList<Certification>;
-  public educations: AngularFireList<Education>;
-  public experiences: AngularFireList<Experience>;
-  public introductions: AngularFireList<Introduction>;
-  public skills: AngularFireList<Skill>;
+  public certifications:  AngularFireList<Certification>;
+  public educations:      AngularFireList<Education>;
+  public experiences:     AngularFireList<Experience>;
+  public introductions:   AngularFireList<Introduction>;
+  public skills:          AngularFireList<Skill>;
   
+  public subscription_certifications: Subscription;
+  public subscription_educations:     Subscription;
+  public subscription_experiences:    Subscription;
+  public subscription_skills:         Subscription;
+  public subscription_introductions:  Subscription;
+
   public dataSet = {
     certifications: [],
     educations: [],
@@ -58,7 +63,7 @@ export class IndexComponent implements OnInit {
     this.introductions  = this.fb.list(`${this.language}/introduction`);
     this.skills         = this.fb.list(`${this.language}/skill`);
 
-    this.certifications.snapshotChanges().subscribe(list => {
+    this.subscription_certifications = this.certifications.snapshotChanges().subscribe(list => {
       this.dataSet.certifications = list.map(item => {
         return {
           $key: item.key,
@@ -69,7 +74,7 @@ export class IndexComponent implements OnInit {
       this.checkIsLoading();
     });
 
-    this.educations.snapshotChanges().subscribe(list => {
+    this.subscription_educations = this.educations.snapshotChanges().subscribe(list => {
       this.dataSet.educations = list.map(item => {
         return {
           $key: item.key,
@@ -80,7 +85,7 @@ export class IndexComponent implements OnInit {
       this.checkIsLoading();
     });
 
-    this.experiences.snapshotChanges().subscribe(list => {
+    this.subscription_experiences = this.experiences.snapshotChanges().subscribe(list => {
       this.dataSet.experiences = list.map(item => {
         return {
           $key: item.key,
@@ -91,7 +96,7 @@ export class IndexComponent implements OnInit {
       this.checkIsLoading();
     });
 
-    this.skills.snapshotChanges().subscribe(list => {
+    this.subscription_skills = this.skills.snapshotChanges().subscribe(list => {
       this.dataSet.skills = list.reduce( (prev, current) => {
         let index = -1;
         prev.some((skill, i) => {
@@ -119,7 +124,7 @@ export class IndexComponent implements OnInit {
       this.checkIsLoading();
     });
 
-    this.introductions.snapshotChanges().subscribe(list => {
+    this.subscription_introductions = this.introductions.snapshotChanges().subscribe(list => {
       this.dataSet.introductions = list.map(item => {
         return {
           $key: item.key,
@@ -140,6 +145,15 @@ export class IndexComponent implements OnInit {
   ngOnInit() 
   {
     
+  }
+
+  ngOnDestroy()
+  {
+    this.subscription_certifications.unsubscribe();
+    this.subscription_educations.unsubscribe();
+    this.subscription_experiences.unsubscribe();
+    this.subscription_introductions.unsubscribe();
+    this.subscription_skills.unsubscribe();
   }
 
   checkIsLoading()
